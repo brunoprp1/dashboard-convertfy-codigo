@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dashboard-convertfy
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: NODE_VERSION
+        value: 18.16.1
+    build:
+      nodeVersion: 18.16.1
+    staticPublishPath: ./dist
