@@ -1,17 +1,11 @@
-import express from 'express';
-import { createServer } from 'http';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const express = require('express');
+const path = require('path');
 
 const app = express();
-const server = createServer(app);
 const port = process.env.PORT || 3000;
 
 // Middleware para servir arquivos estáticos
-app.use(express.static(join(__dirname, 'dist'), {
+app.use(express.static(path.join(__dirname, 'dist'), {
   etag: true,
   maxAge: '1y',
   setHeaders: (res, path) => {
@@ -23,11 +17,11 @@ app.use(express.static(join(__dirname, 'dist'), {
 
 // Rota para todas as requisições que não correspondem a arquivos estáticos
 app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Iniciar o servidor
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`\n🚀 Server is running on http://localhost:${port}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}\n`);
 });
@@ -41,4 +35,4 @@ process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception:', error);
 });
 
-export default server;
+module.exports = app;

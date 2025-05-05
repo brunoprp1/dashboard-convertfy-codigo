@@ -2,16 +2,13 @@
   "name": "project",
   "private": true,
   "version": "4.1.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
-    "start": "node dist-server/server.js",
-    "build": "tsc && tsc -p tsconfig.server.json && vite build",
-    "build:server": "tsc -p tsconfig.server.json",
-    "dev:server": "ts-node-dev --respawn --transpile-only server.ts",
+    "start": "node server.js",
+    "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "render-build": "npm run build"
+    "preview": "vite preview"
   },
   "engines": {
     "node": ">=18.16.1"
